@@ -1,0 +1,135 @@
+---> MongoDb :- It is the most popular NoSQL database , is an open-source documented oriented database.
+  -> 'NoSQL' means 'non-relational' it means that MongoDb is not based on RDBMS.
+  -> The formet to store and retrive data is BSON (similar to JSON formet).
+    -> DOcument Structure 
+      {
+          title:'NeoSoft',
+          url:'http://www.neosoft.com'
+      }
+      -> Sql store data in tabular formet.
+      -> NoSQL database are more scalable and provide superior performance.
+      -> In MongoDb there is no concept of schema or relationship.
+      -> It is faster as RDBMS 
+      -> Rdbms     NoSql 
+        table       collection 
+        tuple       document 
+        column      field 
+        -> Mongodb provide a default '_id' in every document it is similar to the primary key in RDBMS 
+        -> Features of MongoDb 
+           -> Document Oriented 
+           -> scalability 
+        -> Installation of MongoDb 
+        https://www.mongodb.com/try/download/community
+        -> mongod : to run the serve 
+        -> mongo : to run cli 
+
+        db.Emp.find({_id:})
+        {
+            "title":"Array",
+            "courses":["c","c++"]
+        }
+        embedded document 
+        {
+            "title":"Xyz",
+            "pages"789,
+            "author" :{
+                 "fname":"Sumit",
+                 "lname":"Joshi"
+            }
+        }
+      -> Object Id (_id) : 12 bytes for storage (24 hexadecimal digits)
+        -> Adding new documemt to collection 
+          insertOne()
+            -> db.books.insertOne({
+                title:'MongoDb',
+                gst:'999999'
+            })
+          insertMany() :-
+          db.books.insertMany([
+              {title:"Java",gst:"88888"},
+              {title:"Ccna",gst:"7777"}
+          ])
+          -> selecting document 
+             findOne():- 
+               db.books.findOne()
+               db.books.findOne({_id:2},{title:1})
+             find() :- all records
+             Projection() :- 
+              eg:
+                db.books.find({_id:1},{gst:0})
+            eg:
+              db.books.find({
+                  price:{$eq:600}
+              })
+              -> $gt 
+              -> $gte
+              -> $lt 
+              -> $lte
+              -> $ne 
+              -> In 
+               db.books.find({
+                   price:{
+                       $in:[600,900]
+                   }
+               })
+               -- array $in:[]
+                 price:{
+                       $nin:[600,900]
+                   }
+              -> Not In 
+              -> $and 
+              eg:
+              db.books.find({
+                  $and:[
+                      {price:600},
+                      {_id:1}
+                  ]
+              })
+              -> $or 
+              -> $not 
+                price:{
+                    $not:{ $gt:600}
+                }
+                
+            -> $exists 
+              db.books.find({
+                  price:{
+                      $exists:true
+                  }
+              })
+            -> sort()
+            -> limit()
+            -> updateOne() 
+            -> updateMany()
+            -> deleteOne()
+            -> deleteMany()
+
+            -> db.books.updateOne({_id:1},
+            {
+                $inc:{
+                    price:50
+                }
+            })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
